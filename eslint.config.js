@@ -8,7 +8,20 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { globals: globals.browser } },
-  { ignores: ['node_modules', 'dist', 'public'] },
+  {
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'build/**',
+      'public/**',
+      'coverage/**',
+      '.vscode/**',
+      '.idea/**',
+      '*.min.js',
+      '*.d.ts',
+      'vite.config.ts',
+    ],
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
