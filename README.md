@@ -12,6 +12,12 @@ pnpm install
 pnpm dev
 ```
 
+## 启动Storybook页面
+
+```
+pnpm storybook
+```
+
 ### 提交规范
 
 - fix
