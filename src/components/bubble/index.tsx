@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import Loading from './_utils/Loading';
 import useTypedEffect from './hooks/useTypedEffect';
 import useTypingConfig from './hooks/useTypingConfig';
 import { BubbleProps } from './interface';
-
+import './index.css';
 const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (props, ref) => {
   const {
     content,
@@ -35,7 +35,7 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (props, ref) =>
   let contentNode: React.ReactNode;
   if (loading) {
     //如果正在等待响应且没有自定义加载渲染，则使用默认加载渲染（三个点的那个）
-    contentNode = loadingRender ? loadingRender() : <Loading prefix={prefixCls} />;
+    contentNode = loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
   } else {
     contentNode = (
       <>
@@ -45,7 +45,8 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (props, ref) =>
       </>
     );
   }
-  let fullContent: React.ReactNode = <div>{contentNode}</div>;
+
+  let fullContent: React.ReactNode = <div className="temp-bubble-content">{contentNode}</div>;
   if (header || footer) {
     fullContent = (
       <div className={`${prefixCls}-content-wrapper`}>
@@ -55,6 +56,13 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (props, ref) =>
       </div>
     );
   }
-  return <div {...restProps} ref={ref}>{fullContent}</div>;
+  const placementStyle: CSSProperties =
+    placement === 'end' ? { flexDirection: 'row-reverse' } : { flexDirection: 'row' };
+
+  return (
+    <div {...restProps} ref={ref} className="temp-bubble-container" style={placementStyle}>
+      {fullContent}
+    </div>
+  );
 };
 export default React.forwardRef(Bubble);
