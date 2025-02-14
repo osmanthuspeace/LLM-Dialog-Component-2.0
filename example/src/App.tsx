@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <Bubble content="Hello, World!" />
+        <Bubble content="Hello, World!" placement='end'/>
       </div>
     </>
   );
