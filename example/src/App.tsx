@@ -4,7 +4,9 @@ import Bubble from '../../src/components/bubble';
 function App() {
   return (
     <>
-      <Bubble content="Hello, World!" />
+      <div className="container">
+        <Bubble content="Hello, World!" />
+      </div>
     </>
   );
 }
