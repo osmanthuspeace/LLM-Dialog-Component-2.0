@@ -27,6 +27,9 @@ importers:
       '@eslint/js':
         specifier: ^9.20.0
         version: 9.20.0
+      '@storybook/addon-a11y':
+        specifier: 8.5.5
+        version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
       '@storybook/addon-essentials':
         specifier: 8.5.5
         version: 8.5.5(@types/react@18.3.18)(storybook@8.5.5(prettier@3.5.0))
@@ -34,6 +37,9 @@ importers:
         specifier: 8.5.5
         version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
       '@storybook/addon-onboarding':
+        specifier: 8.5.5
+        version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
+      '@storybook/addon-themes':
         specifier: 8.5.5
         version: 8.5.5(storybook@8.5.5(prettier@3.5.0))
       '@storybook/blocks':
@@ -571,6 +577,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@storybook/addon-a11y@8.5.5':
+    resolution: {integrity: sha512-+svmnXdUhuwawNQqvYWkPsxniVYtjorr56myrqcMcexbX4SjtD/SX8cFlqTU0AGTWzrmGjSTEePCfWrG7C6R7g==}
+    peerDependencies:
+      storybook: ^8.5.5
+
   '@storybook/addon-actions@8.5.5':
     resolution: {integrity: sha512-XJtE69QBXROM0xvAAFohkwuBLLnuEFBvAnmsY4+pfk001BCEZf7UXDY/XKD3Ew/Uou6o7oco7RmStycSlXU2Ng==}
     peerDependencies:
@@ -618,6 +629,11 @@ packages:
 
   '@storybook/addon-outline@8.5.5':
     resolution: {integrity: sha512-9+TLCUu/2YPL/r9LzOkQc4TBZ6PrxyB0+8uwTZ08pMrQH0zhtuwHWu/VNoR1MILjLx6Qt5bVHntvH0oKMfEa6g==}
+    peerDependencies:
+      storybook: ^8.5.5
+
+  '@storybook/addon-themes@8.5.5':
+    resolution: {integrity: sha512-hVqbJMpZ57ZPO/s+gmAPvZumfm/UhdyKMfF92iGA3OZuRz52iMmAflzYGCkyp6iccBSKAK/FIOPN+r7UMwFReg==}
     peerDependencies:
       storybook: ^8.5.5
 
@@ -977,6 +993,10 @@ packages:
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
+
+  axe-core@4.10.2:
+    resolution: {integrity: sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==}
+    engines: {node: '>=4'}
 
   axios@1.7.9:
     resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
@@ -2841,6 +2861,13 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.34.6':
     optional: true
 
+  '@storybook/addon-a11y@8.5.5(storybook@8.5.5(prettier@3.5.0))':
+    dependencies:
+      '@storybook/addon-highlight': 8.5.5(storybook@8.5.5(prettier@3.5.0))
+      '@storybook/test': 8.5.5(storybook@8.5.5(prettier@3.5.0))
+      axe-core: 4.10.2
+      storybook: 8.5.5(prettier@3.5.0)
+
   '@storybook/addon-actions@8.5.5(storybook@8.5.5(prettier@3.5.0))':
     dependencies:
       '@storybook/global': 5.0.0
@@ -2920,6 +2947,11 @@ snapshots:
   '@storybook/addon-outline@8.5.5(storybook@8.5.5(prettier@3.5.0))':
     dependencies:
       '@storybook/global': 5.0.0
+      storybook: 8.5.5(prettier@3.5.0)
+      ts-dedent: 2.2.0
+
+  '@storybook/addon-themes@8.5.5(storybook@8.5.5(prettier@3.5.0))':
+    dependencies:
       storybook: 8.5.5(prettier@3.5.0)
       ts-dedent: 2.2.0
 
@@ -3374,6 +3406,8 @@ snapshots:
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.1.0
+
+  axe-core@4.10.2: {}
 
   axios@1.7.9:
     dependencies:
