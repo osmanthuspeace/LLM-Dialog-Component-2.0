@@ -18,6 +18,18 @@ pnpm dev
 pnpm storybook
 ```
 
+## @测试
+
+```
+pnpm vitest
+```
+
+## 查看测试覆盖率
+
+```
+pnpm coverage
+```
+
 ### 提交规范
 
 - fix
