@@ -8,5 +8,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['node_modules/.cache/storybook'],
   },
-  test: {}
+  test: {
+    environment: "jsdom",
+    globals: true
+  }
 });

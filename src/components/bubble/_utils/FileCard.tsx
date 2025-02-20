@@ -69,7 +69,11 @@ export default function FileCard({ file, showImg, onClick }: FileCardProps) {
 
   return (
     file && (
-      <div onClick={() => onClick && onClick(file)} key={file.uid}>
+      <div
+        onClick={() => onClick && onClick(file)}
+        key={file.uid}
+        data-testid="file-card"
+      >
         {imgTypes.includes(fileType) && showImg && file.url ? (
           <img src={file.url} alt={file.name} className="file-image" />
         ) : (
