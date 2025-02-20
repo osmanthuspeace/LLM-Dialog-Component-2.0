@@ -1,0 +1,26 @@
+.code-block{
+    border: 1px solid #50505A;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #50505A;
+}
+
+.code-header{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 15px;
+    font-size: 12px;
+}
+
+.copy-btn{
+    color: white;
+    background-color: #50505A;
+    border: none;
+    font-size: 12px;
+}
+
+pre.code-pre{
+    margin: 0;
+}

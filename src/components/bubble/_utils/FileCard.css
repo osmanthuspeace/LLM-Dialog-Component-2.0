@@ -1,0 +1,53 @@
+.icon{
+    width: 1.5em;
+    height: 1.5em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.file{
+    max-width: 240px;
+    display: flex;
+    align-items: center;
+}
+
+.file-image{
+    max-width: 300px;
+    max-height: 200px;
+    aspect-ratio: auto 1630/986;
+}
+
+.file-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.file-name:hover{
+    cursor: pointer;
+}
+
+.file-info{
+    margin-left: 1em;
+}
+
+.file-more{
+    color: #bbb;
+    font-size: 12px;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1;
+    margin-bottom: 3px;
+}
+
