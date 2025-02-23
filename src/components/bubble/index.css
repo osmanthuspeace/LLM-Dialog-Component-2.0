@@ -2,6 +2,8 @@
   display: flex;
 }
 .temp-bubble-content {
+  max-width: 80%;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;

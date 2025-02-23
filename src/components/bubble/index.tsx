@@ -14,7 +14,6 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (props, ref) =>
     loadingRender,
     header,
     footer,
-    children,
     ...restProps
   } = props;
 

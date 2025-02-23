@@ -18,11 +18,22 @@ export const createMessage = () => {
 };
 
 // 发起对话
-export const launchChat = ({ bot_id, user_id, additional_messages, stream }: LaunchApiProps) => {
-  return api.post('/v3/chat', {
-    bot_id,
-    user_id,
-    additional_messages,
-    stream,
-  });
+export const launchChat = ({
+  bot_id,
+  user_id,
+  additional_messages,
+  stream,
+}: LaunchApiProps) => {
+  return api.post(
+    '/v3/chat',
+    {
+      bot_id,
+      user_id,
+      additional_messages,
+      stream,
+    },
+    {
+      responseType: 'stream',
+    }
+  );
 };

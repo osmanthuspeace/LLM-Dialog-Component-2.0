@@ -5,7 +5,8 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 1000,
+  timeout: 0,
+  adapter:"fetch"
 });
 
 //测试用，如果用户登录则可以发请求，与组件无关
