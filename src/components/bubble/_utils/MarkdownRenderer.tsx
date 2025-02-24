@@ -4,7 +4,8 @@ import codePlugin from './codePlugin';
 import 'highlight.js/styles/vs2015.css';
 import './MarkdownRenderer.css';
 
-const MarkdownRenderer: React.FC<{ mdContent: string }> = ({ mdContent }) => {
+const MarkdownRenderer = (mdContent: string) => {
+
   const md = useMemo(() => {
     const parser = new MarkdownIt({
       html: true,

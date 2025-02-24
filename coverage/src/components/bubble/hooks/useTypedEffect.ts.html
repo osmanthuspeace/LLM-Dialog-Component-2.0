@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/40</span>
+                <span class='fraction'>0/46</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/40</span>
+                <span class='fraction'>0/46</span>
             </div>
         
             
@@ -113,7 +113,13 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -128,19 +134,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,10 +151,25 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -170,17 +182,20 @@
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >const useTypedEffect = (</span>
-<span class="cstat-no" title="statement not covered" >  content: React.ReactNode | object,</span>
-<span class="cstat-no" title="statement not covered" >  isTyping: boolean,</span>
+<span class="cstat-no" title="statement not covered" >  content: string | undefined,</span>
+<span class="cstat-no" title="statement not covered" >  isStreaming: boolean,</span>
+<span class="cstat-no" title="statement not covered" >  typingEnabled: boolean,</span>
 <span class="cstat-no" title="statement not covered" >  typingStep: number,</span>
 <span class="cstat-no" title="statement not covered" >  typingInterval: number</span>
-<span class="cstat-no" title="statement not covered" >): [typedContent: React.ReactNode | object, shouldContinueTyping: boolean] =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >): [typedContent: string, shouldContinueTyping: boolean] =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const prevContentRef = React.useRef&lt;React.ReactNode | object&gt;(''); //保存content中已经打印出来的内容</span>
-<span class="cstat-no" title="statement not covered" >  const [typingIndex, setTypingIndex] = React.useState&lt;number&gt;(1);</span>
-<span class="cstat-no" title="statement not covered" >  const mergedTypingEnabled = isTyping &amp;&amp; isString(content);</span>
+<span class="cstat-no" title="statement not covered" >  const [typingIndex, setTypingIndex] = React.useState&lt;number&gt;(0);</span>
+<span class="cstat-no" title="statement not covered" >  const mergedTypingEnabled =</span>
+<span class="cstat-no" title="statement not covered" >    (typingEnabled || isStreaming) &amp;&amp; isString(content);</span>
 &nbsp;
   //在DOM更新之前判断
 <span class="cstat-no" title="statement not covered" >  React.useLayoutEffect(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (isStreaming) return;</span>
     //如果没有开启打字效果，直接显示所有内容
 <span class="cstat-no" title="statement not covered" >    if (!mergedTypingEnabled &amp;&amp; isString(content)) {</span>
 <span class="cstat-no" title="statement not covered" >      setTypingIndex(content.length);</span>
@@ -203,12 +218,15 @@
 <span class="cstat-no" title="statement not covered" >        clearTimeout(timer);</span>
 <span class="cstat-no" title="statement not covered" >      };</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  }, [typingIndex, isTyping, content]);</span>
+<span class="cstat-no" title="statement not covered" >  }, [typingIndex, typingEnabled, content]);</span>
 &nbsp;
   //应该实时显示的内容
-<span class="cstat-no" title="statement not covered" >  const mergedTypingContent = mergedTypingEnabled ? content.slice(0, typingIndex) : content;</span>
+<span class="cstat-no" title="statement not covered" >  const mergedTypingContent = mergedTypingEnabled</span>
+<span class="cstat-no" title="statement not covered" >    ? content.slice(0, typingIndex)</span>
+<span class="cstat-no" title="statement not covered" >    : content;</span>
   //是否应该继续打字
-<span class="cstat-no" title="statement not covered" >  const shouldContinueTyping = mergedTypingEnabled &amp;&amp; typingIndex &lt; content.length;</span>
+<span class="cstat-no" title="statement not covered" >  const shouldContinueTyping =</span>
+<span class="cstat-no" title="statement not covered" >    mergedTypingEnabled &amp;&amp; typingIndex &lt; content.length;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return [mergedTypingContent, shouldContinueTyping];</span>
 <span class="cstat-no" title="statement not covered" >};</span>
@@ -220,7 +238,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-20T12:51:00.040Z
+                at 2025-02-24T05:59:16.648Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
