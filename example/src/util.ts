@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { MessageInfo } from './App';
+import React from 'react';
 
 export const useStreamProcessor = async (
   response: AxiosResponse<ReadableStream>,
@@ -69,15 +70,30 @@ export const useStreamProcessor = async (
           }
         }
       }
+      if (resultArray.length > 0) {
+        data += resultArray.join('');
 
-      data += resultArray.join('');
-
-      setMessageList(prev => {
-        const last = prev[prev.length - 1];
-        return [...prev.slice(0, -1), { ...last, content: data }];
-      });
+        setMessageList(prev => {
+          const last = prev[prev.length - 1];
+          return [...prev.slice(0, -1), { ...last, content: data }];
+        });
+      }
     }
   }
   console.log('Received data:', data);
   setIsReplying(false);
+};
+
+export const useThrottle = (fn: Function, delay: number = 100) => {
+  const last = React.useRef(0);
+  return React.useCallback(
+    (...args: any[]) => {
+      const now = performance.now();
+      if (now - last.current > delay) {
+        last.current = now;
+        fn(...args);
+      }
+    },
+    [fn, delay]
+  );
 };

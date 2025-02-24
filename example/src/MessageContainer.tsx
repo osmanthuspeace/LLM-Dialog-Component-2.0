@@ -6,9 +6,9 @@ export interface MessageContainerProps
 const MessageContainerInternal = ({ children }: MessageContainerProps, ref) => {
   return (
     <div
-      className="container"
+      className="message-container"
       style={{
-        maxHeight: '40%',
+        height: '80%',
         overflow: 'auto',
         border: '1px solid black',
         borderRadius: '10px',

@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 export interface SenderProps {
   inputValue: string;
   isReplying: boolean;
@@ -17,6 +19,7 @@ export const Sender = ({
     inputValue === '' || isReplying
       ? { cursor: 'not-allowed' }
       : { cursor: 'pointer' };
+  const [isComposing, setIsComposing] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +27,18 @@ export const Sender = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { target } = e;
+    target.style.height = 'auto';
+    target.style.height = `${target.scrollHeight - 20}px`;
+
     onChange(e);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
+      e.preventDefault();
+      onSubmit(inputValue);
+    }
   };
 
   return (
@@ -34,7 +48,7 @@ export const Sender = ({
         style={{
           width: '400px',
           position: 'absolute',
-          bottom: '0px',
+          bottom: '10px',
           margin: 'auto 0',
           left: '50%',
           transform: 'translateX(-50%)',
@@ -46,14 +60,18 @@ export const Sender = ({
           placeholder="发送消息"
           value={inputValue}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          onCompositionStart={() => setIsComposing(true)}
+          onCompositionEnd={() => setIsComposing(false)}
+          rows={1}
           style={{
             flex: '1',
-            height: '20px',
             fontSize: '16px',
-            padding: '10px 40px 10px 10px',
+            padding: '10px 50px 10px 10px',
             outline: 'none',
             border: '1px solid grey',
-            borderRadius: 'calc(infinity * 1px)',
+            borderRadius: '20px',
+            resize: 'none',
           }}
         ></textarea>
         <button
