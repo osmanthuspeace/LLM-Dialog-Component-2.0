@@ -9,14 +9,12 @@ export const MessageList = ({
   return (
     <>
       <div
-        className="message-container"
+        className="list-container"
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: '10px',
-          padding: '20px 0',
-          height: '80%',
-          overflow: 'scroll',
+          height: '100%',
         }}
       >
         {messageList.map((message, index) => {
