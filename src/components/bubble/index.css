@@ -1,9 +1,10 @@
 .temp-bubble-container {
   display: flex;
+  flex-wrap: wrap;
 }
 .temp-bubble-content {
   max-width: 80%;
-  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
