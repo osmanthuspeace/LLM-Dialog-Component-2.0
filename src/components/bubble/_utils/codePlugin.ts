@@ -13,7 +13,6 @@ const copiedInnerHTML = `
 const clipboard = new ClipboardJS(".copy-btn")
 
 clipboard.on("success", e => {
-  console.log("复制成功")
   const trigger = e.trigger;
 
   e.clearSelection()

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -84,48 +84,48 @@
 <a name='L19'></a><a href='#L19'>19</a>
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import MarkdownIt from 'markdown-it';<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
-<span class="cstat-no" title="statement not covered" >import { useMemo } from 'react';</span>
-<span class="cstat-no" title="statement not covered" >import codePlugin from './codePlugin';</span>
-<span class="cstat-no" title="statement not covered" >import 'highlight.js/styles/vs2015.css';</span>
-<span class="cstat-no" title="statement not covered" >import './MarkdownRenderer.css';</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import MarkdownIt from 'markdown-it';
+import { useMemo } from 'react';
+import codePlugin from './codePlugin';
+import 'highlight.js/styles/vs2015.css';
+import './MarkdownRenderer.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >const MarkdownRenderer: React.FC&lt;{ mdContent: string }&gt; = ({ mdContent }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const md = useMemo(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const parser = new MarkdownIt({</span>
-<span class="cstat-no" title="statement not covered" >      html: true,</span>
-<span class="cstat-no" title="statement not covered" >      breaks: true,</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >    parser.use(codePlugin);</span>
-<span class="cstat-no" title="statement not covered" >    return parser;</span>
-<span class="cstat-no" title="statement not covered" >  }, []);</span>
+const MarkdownRenderer: React.FC&lt;{ mdContent: string }&gt; = ({ mdContent }) =&gt; {
+  const md = useMemo(() =&gt; {
+    const parser = new MarkdownIt({
+      html: true,
+      breaks: true,
+    });
+    parser.use(codePlugin);
+    return parser;
+  }, []);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  const html = useMemo(() =&gt; md.render(mdContent), [mdContent]);</span>
+  const html = useMemo(() =&gt; md.render(mdContent), [mdContent]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return &lt;div dangerouslySetInnerHTML={{ __html: html }} /&gt;;</span>
-<span class="cstat-no" title="statement not covered" >};</span>
-<span class="cstat-no" title="statement not covered" >export default MarkdownRenderer;</span>
+  return &lt;div dangerouslySetInnerHTML={{ __html: html }} /&gt;;
+};
+export default MarkdownRenderer;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -133,7 +133,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-20T12:51:00.040Z
+                at 2025-02-25T09:25:54.017Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

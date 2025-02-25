@@ -54,10 +54,12 @@ const imgTypes = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
 
 export default function FileCard({ file, showImg, onClick }: FileCardProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const lastDotIndex = file?.name?.lastIndexOf('.');
+  const lastDotIndex = file?.name?.lastIndexOf('.') ?? -1;
   const fileType =
     lastDotIndex !== -1 ? file?.name?.substring(lastDotIndex + 1) : '';
-  const iconHref = fileIconMap[fileType] || fileIconMap.default;
+  const iconHref = fileType
+    ? fileIconMap[fileType] || fileIconMap.default
+    : fileIconMap.default;
 
   function formatFileSize(bytes: number) {
     if (bytes === 0) return '0 B';
@@ -74,7 +76,7 @@ export default function FileCard({ file, showImg, onClick }: FileCardProps) {
         key={file.uid}
         data-testid="file-card"
       >
-        {imgTypes.includes(fileType) && showImg && file.url ? (
+        {fileType && imgTypes.includes(fileType) && showImg && file.url ? (
           <img src={file.url} alt={file.name} className="file-image" />
         ) : (
           <div className="file">
