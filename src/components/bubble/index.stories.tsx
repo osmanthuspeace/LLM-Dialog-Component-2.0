@@ -122,7 +122,7 @@ function bubbleSort(arr) {
 ### End
 `,
     messageRender: content => {
-      return MarkdownRenderer({ mdContent: content });
+      return MarkdownRenderer(content);
     },
   },
 };
@@ -381,7 +381,7 @@ X² Y³ ¾ ¼  ×  ÷   »
 ### End
 `,
     messageRender: content => {
-      return MarkdownRenderer({ mdContent: content });
+      return MarkdownRenderer(content);
     },
   },
 };

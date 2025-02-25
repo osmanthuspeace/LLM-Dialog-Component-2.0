@@ -8,8 +8,8 @@ import '@testing-library/dom';
 describe('Bubble', () => {
   it('should render markdown content correctly', () => {
     const mdContent = '# Hello, World!';
-    const messageRender = content => {
-      return MarkdownRenderer({ mdContent: content });
+    const messageRender = (content: string) => {
+      return MarkdownRenderer(content);
     };
 
     render(<Bubble content={mdContent} messageRender={messageRender}></Bubble>);
@@ -22,8 +22,8 @@ describe('Bubble', () => {
 
   it('Bubble support copy code', async () => {
     const mdContent = '```javascript\nconsole.log("Hello, World!");\n```';
-    const messageRender = content => {
-      return MarkdownRenderer({ mdContent: content });
+    const messageRender = (content: string) => {
+      return MarkdownRenderer(content);
     };
 
     render(<Bubble content={mdContent} messageRender={messageRender}></Bubble>);
@@ -53,8 +53,8 @@ describe('Bubble', () => {
 
   it('Bubble support unknown code type', async () => {
     const mdContent = '```javascr\nconsole.log("Hello, World!");\n```';
-    const messageRender = content => {
-      return MarkdownRenderer({ mdContent: content });
+    const messageRender = (content: string) => {
+      return MarkdownRenderer(content);
     };
 
     render(<Bubble content={mdContent} messageRender={messageRender}></Bubble>);
