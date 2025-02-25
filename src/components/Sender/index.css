@@ -1,0 +1,151 @@
+/* 基础样式 */
+.sender-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 10px;
+}
+
+.sender-input-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 输入框 */
+.sender-textarea {
+  flex: 1;
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: none;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sender-textarea:focus {
+  border-color: #2196f3;
+}
+.sender-textarea:disabled {
+  background-color: #f5f5f5;
+  color: #bfbfbf;
+  cursor: not-allowed;
+}
+
+/* 操作区域 */
+.sender-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.sender-actions-left {
+  display: flex;
+  gap: 8px;
+}
+.sender-actions-right {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* 按钮 */
+.sender-button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sender-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sender-submit-button {
+  background: #cce6ff;
+  color: #2196f3;
+}
+
+.sender-submit-button:hover {
+  background: #b3d9ff;
+}
+
+/* 文件上传按钮 */
+.sender-file-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #999;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.sender-file-button:hover {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.sender-file-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .sender-input-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sender-button {
+    margin-top: 8px;
+  }
+}
+
+/* 暗色主题 */
+@media (prefers-color-scheme: dark) {
+  .sender-container {
+    background-color: #1f1f1f;
+    border-color: #333;
+  }
+
+  .sender-textarea {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #fff;
+  }
+
+  .sender-submit-button {
+    background-color: #0d47a1;
+    color: #90caf9;
+  }
+
+  .sender-submit-button:hover {
+    background-color: #1565c0;
+  }
+
+  .sender-file-button {
+    border-color: #444;
+    color: #777;
+  }
+
+  .sender-file-button:hover {
+    background-color: #333;
+    color: #aaa;
+  }
+}
