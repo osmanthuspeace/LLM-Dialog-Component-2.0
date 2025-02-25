@@ -14,7 +14,7 @@ export interface TypingOption {
 }
 export type AnyObject = Record<PropertyKey, any>;
 
-export type BubbleContentType = React.ReactNode | AnyObject;
+export type BubbleContentType = string;
 
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
@@ -22,6 +22,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;
+  isStreaming?: boolean;
   messageRender?: (content: ContentType) => React.ReactNode;
   loadingRender?: () => React.ReactNode;
   header?: React.ReactNode;
