@@ -17,6 +17,7 @@ export interface MessageListProps extends HTMLAttributes<HTMLDivElement> {
 export const MessageList = ({
   messageList,
   autoScroll = true,
+  ...rest
 }: MessageListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useState(autoScroll);
@@ -62,10 +63,10 @@ export const MessageList = ({
           overflow: 'auto',
           border: '1px solid black',
           borderRadius: '10px',
-          margin: '50px',
           padding: '0 50px',
           position: 'relative',
         }}
+        {...rest}
         ref={containerRef}
       >
         <div
