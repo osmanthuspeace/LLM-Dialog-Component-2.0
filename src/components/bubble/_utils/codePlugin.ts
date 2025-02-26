@@ -29,6 +29,10 @@ const codePlugin = (md: MarkdownIt) => {
     const lang = token.info.trim();
     const code = token.content;
 
+    //转义一下，避免直接在对话页面中渲染出来
+    const escapedCodeForAttr = md.utils.escapeHtml(code)
+      .replace(/"/g, '&quot;');
+
     let highlightCode: string;
     if (lang && hljs.getLanguage(lang)) {
       try {
@@ -44,7 +48,7 @@ const codePlugin = (md: MarkdownIt) => {
       <div class="code-block">
         <div class="code-header">
           <span class="code-lang">${lang || 'plaintext'}</span>
-          <button class="copy-btn" data-clipboard-text="${code}">
+          <button class="copy-btn" data-clipboard-text="${escapedCodeForAttr}">
             Copy
           </button>
         </div>
