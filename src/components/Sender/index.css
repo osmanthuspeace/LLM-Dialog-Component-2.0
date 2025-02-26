@@ -7,30 +7,36 @@
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 10px;
+  width: 100%;
 }
 
 .sender-input-area {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  width: 100%;
+  position: relative;
 }
 
 /* 输入框 */
 .sender-textarea {
-  flex: 1;
-  height: 40px;
+  width: 100%;
+  min-height: 40px;
+  max-height: 120px;
   padding: 8px 12px;
+  padding-right: 100px; /* 为右侧按钮留出空间 */
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 20px;
   resize: none;
   outline: none;
   font-size: 14px;
   line-height: 1.5;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .sender-textarea:focus {
   border-color: #2196f3;
 }
+
 .sender-textarea:disabled {
   background-color: #f5f5f5;
   color: #bfbfbf;
@@ -39,31 +45,36 @@
 
 /* 操作区域 */
 .sender-actions {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  gap: 8px;
 }
 
 .sender-actions-left {
   display: flex;
   gap: 8px;
 }
+
 .sender-actions-right {
   display: flex;
   gap: 8px;
-  margin-left: auto;
 }
 
 /* 按钮 */
 .sender-button {
-  padding: 8px 20px;
+  padding: 6px 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: 16px;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s;
   white-space: nowrap;
+  background: #cce6ff;
+  color: #2196f3;
 }
 
 .sender-button:disabled {
@@ -76,7 +87,7 @@
   color: #2196f3;
 }
 
-.sender-submit-button:hover {
+.sender-submit-button:hover:not(:disabled) {
   background: #b3d9ff;
 }
 
@@ -89,14 +100,14 @@
   justify-content: center;
   background: none;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
   color: #999;
   font-size: 16px;
   transition: all 0.2s;
 }
 
-.sender-file-button:hover {
+.sender-file-button:hover:not(:disabled) {
   background-color: #f0f0f0;
   color: #666;
 }
@@ -108,12 +119,22 @@
 
 /* 响应式设计 */
 @media (max-width: 480px) {
-  .sender-input-area {
-    flex-direction: column;
-    align-items: stretch;
+  .sender-textarea {
+    padding-right: 50px;
   }
+
+  .sender-actions {
+    gap: 4px;
+  }
+
   .sender-button {
-    margin-top: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .sender-file-button {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -135,7 +156,7 @@
     color: #90caf9;
   }
 
-  .sender-submit-button:hover {
+  .sender-submit-button:hover:not(:disabled) {
     background-color: #1565c0;
   }
 
@@ -144,7 +165,7 @@
     color: #777;
   }
 
-  .sender-file-button:hover {
+  .sender-file-button:hover:not(:disabled) {
     background-color: #333;
     color: #aaa;
   }

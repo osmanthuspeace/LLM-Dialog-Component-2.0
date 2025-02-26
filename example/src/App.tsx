@@ -29,7 +29,6 @@ function App() {
         },
       ],
     });
-
     useStreamProcessor(response, setMessageList, setIsReplying);
   };
 
