@@ -63,12 +63,20 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
   }
 
   let fullContent: React.ReactNode = (
-    <div className="temp-bubble-content">{contentNode}</div>
+    <div
+      className="temp-bubble-content"
+    >
+      {contentNode}
+    </div>
   );
   if (header || footer) {
     fullContent = (
-      <div className={`${prefixCls}-content-wrapper`}>
-        {header && <div>{header}</div>}
+      <div
+        className={`${prefixCls}-content-wrapper`}
+        style={{
+          alignItems: 'flex-end',
+        }}
+      >
         {fullContent}
         {footer && <div>{footer}</div>}
       </div>

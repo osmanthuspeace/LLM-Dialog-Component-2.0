@@ -5,6 +5,7 @@ import { useStreamProcessor } from './util';
 import { MessageList } from './MessageList';
 import { Sender } from './Sender';
 import Conversations from '../../src/components/conversations/index';
+import Bubble from '../../src/components/bubble';
 export interface MessageInfo {
   role: string;
   content: string;
@@ -14,6 +15,7 @@ function App() {
   const [inputValue, setInputValue] = React.useState<string>('');
   const [messageList, setMessageList] = React.useState<MessageInfo[]>([]);
 
+  const { startProcessing } = useStreamProcessor();
   const fetchData = async (content: string) => {
     setIsReplying(true);
     const response = await launchChat({
@@ -28,7 +30,31 @@ function App() {
         },
       ],
     });
-    useStreamProcessor(response, setMessageList, setIsReplying);
+    startProcessing({
+      data: response.data,
+      onStart: () => {
+        setMessageList(prev => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: '',
+          },
+        ]);
+      },
+      onMessageUpdate: content => {
+        setMessageList(prev => {
+          const last = prev[prev.length - 1];
+          return [...prev.slice(0, -1), { ...last, content: content }];
+        });
+      },
+      onCompleted: () => {
+        setIsReplying(false);
+      },
+      onError: error => {
+        console.error(error);
+        setIsReplying(false);
+      },
+    });
   };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -68,7 +94,38 @@ function App() {
           flex: '1',
         }}
       >
-        <MessageList messageList={messageList} />
+        <MessageList
+          messageList={messageList}
+          autoScroll={false}
+          renderBubble={(message: MessageInfo, index: number) => {
+            return (
+              <Bubble
+                key={index}
+                header={
+                  message.role === 'assistant' ? (
+                    'Assistant'
+                  ) : (
+                    <div
+                      style={{
+                        textAlign: 'end',
+                      }}
+                    >
+                      User
+                    </div>
+                  )
+                }
+                footer={message.role === 'user' ? null : '2021-08-24 15:00:00'}
+                content={message.content}
+                placement={message.role === 'user' ? 'end' : 'start'}
+                style={{
+                  backgroundColor:
+                    message.role === 'user' ? '#e3f2fd' : '#f5f5f5',
+                  borderRadius: '15px',
+                }}
+              />
+            );
+          }}
+        />
 
         <Sender
           inputValue={inputValue}

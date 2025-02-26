@@ -12,18 +12,20 @@ import { useThrottle } from './util';
 export interface MessageListProps extends HTMLAttributes<HTMLDivElement> {
   messageList: MessageInfo[];
   autoScroll?: boolean;
+  renderBubble?: (message: MessageInfo, index: number) => JSX.Element;
 }
 
 export const MessageList = ({
   messageList,
   autoScroll = true,
+  renderBubble,
   ...rest
 }: MessageListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useState(autoScroll);
 
   const handleScroll = useThrottle(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !isAutoScrollEnabled) return;
 
     const { scrollTop, clientHeight, scrollHeight } = containerRef.current;
     const isNearBottom = scrollTop + clientHeight + 50 >= scrollHeight;
@@ -46,6 +48,7 @@ export const MessageList = ({
     });
   }, [autoScroll, isAutoScrollEnabled, messageList]);
   useEffect(() => {
+    if (!isAutoScrollEnabled) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -53,7 +56,7 @@ export const MessageList = ({
       passive: true,
     });
     return () => container.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+  }, [handleScroll, isAutoScrollEnabled]);
   return (
     <>
       <div
@@ -79,7 +82,9 @@ export const MessageList = ({
           }}
         >
           {messageList.map((message, index) => {
-            return (
+            return renderBubble ? (
+              renderBubble(message, index)
+            ) : (
               <Bubble
                 key={index}
                 content={message.content}
