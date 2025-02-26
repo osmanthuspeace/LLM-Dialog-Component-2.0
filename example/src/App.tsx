@@ -30,7 +30,6 @@ function App() {
         },
       ],
     });
-
     useStreamProcessor(response, setMessageList, setIsReplying);
   };
   const [isAutoScrollEnabled, setIsAutoScrollEnabled] = React.useState(true);
