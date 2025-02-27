@@ -1,4 +1,5 @@
-import { LaunchApiProps } from './interface';
+import { AxiosResponse } from 'axios';
+import { LaunchApiProps, ViewMessaageListReturnType } from './interface';
 import api from './request';
 
 /**
@@ -12,6 +13,18 @@ export const createConversation = () => {
   return api.post('/v1/conversation/create');
 };
 
+export const viewMessageList = (
+  conversationId: string,
+  order: 'asc' | 'desc' = 'asc'
+): Promise<AxiosResponse<ViewMessaageListReturnType, any>> => {
+  return api.post(
+    `/v1/conversation/message/list?conversation_id=${conversationId}`,
+    {
+      order,
+    }
+  );
+};
+
 // 创建消息
 export const createMessage = () => {
   return api.post('/v1/conversation/message/create');
@@ -23,9 +36,10 @@ export const launchChat = ({
   user_id,
   additional_messages,
   stream,
+  conversation_id,
 }: LaunchApiProps) => {
   return api.post(
-    '/v3/chat',
+    `/v3/chat?conversation_id=${conversation_id}`,
     {
       bot_id,
       user_id,
