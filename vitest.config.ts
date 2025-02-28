@@ -10,7 +10,7 @@ export default defineConfig({
             provider: 'v8',
             cleanOnRerun: true,
             reporter: ['text', 'json', 'html'],
-            exclude: ['**/*.stories.tsx', '**/*.stories.ts', ...coverageConfigDefaults.exclude]
+            exclude: ['**/*.stories.tsx', '**/*.stories.ts', "**/example/**", "**/interface.ts", ...coverageConfigDefaults.exclude]
         }
     }
 })
