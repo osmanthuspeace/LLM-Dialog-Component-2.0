@@ -1,3 +1,4 @@
+import "./Loading.css";
 const Loading = ({ prefixCls }: { prefixCls: string }) => {
   return (
     <span className={`${prefixCls}-dot`}>

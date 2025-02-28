@@ -2,10 +2,11 @@ import React from 'react';
 
 interface StartProcessingOptions {
   data: ReadableStream;
-  onMessageUpdate: (content: string) => void;
+  onMessageUpdate: (content: string, isLoading?: boolean) => void;
   onStart: () => void;
   onCompleted: () => void;
   onError: (error: unknown) => void;
+  setLoading?: (isLoading: boolean) => void;
   handleExtractContent?: (decodedValue: string) => string;
 }
 
@@ -18,7 +19,7 @@ export const useStreamProcessor = () => {
       onMessageUpdate,
       onCompleted,
       onError,
-      handleExtractContent = extractContent,
+      handleExtractContent = handleStream,
     } = options;
 
     if (!data) {
@@ -29,7 +30,7 @@ export const useStreamProcessor = () => {
     const decoder = new TextDecoder();
     let isDone = false;
     let content = '';
-
+    let globalLoading = false;
     try {
       onStart();
       while (!signal.aborted) {
@@ -39,16 +40,18 @@ export const useStreamProcessor = () => {
           const finalText = decoder.decode(undefined, { stream: false });
           content += finalText;
 
-          onMessageUpdate(content);
+          onMessageUpdate(content, false);
           break;
         } else if (value) {
           const decodedValue = decoder.decode(value, { stream: true });
 
-          const result = handleExtractContent(decodedValue);
+          const result = handleExtractContent(decodedValue, isLoading => {
+            globalLoading = isLoading;
+          });
 
           content += result;
 
-          onMessageUpdate(content);
+          onMessageUpdate(content, globalLoading);
         }
       }
       onCompleted();
@@ -60,7 +63,10 @@ export const useStreamProcessor = () => {
 };
 
 //从raw的数据中提取出AI的回答内容
-const extractContent = (decodedValue: string): string => {
+const handleStream = (
+  decodedValue: string,
+  setLoading?: (isLoading: boolean) => void
+): string => {
   const BLOCK_SEPARATOR = '\n\n';
   const DATA_PREFIX = 'data:';
   const blocks = decodedValue.split(BLOCK_SEPARATOR);
@@ -77,23 +83,58 @@ const extractContent = (decodedValue: string): string => {
         jsonData += trimmedLine.slice(DATA_PREFIX.length).trim();
       }
     }
-    if (type === 'delta') {
-      try {
-        const json = JSON.parse(jsonData);
-        if (json.role === 'assistant' && json.type === 'answer') {
-          resultArray.push(json.content || '');
-        }
-      } catch (error) {
-        if (error instanceof SyntaxError) {
-          console.warn('JSON 语法错误:', jsonData, 'in block:', block);
-        } else if (typeof error === 'string') {
-          console.warn('未知错误:', error, 'in block:', block);
-        }
-        continue;
-      }
-    }
+    handleBlock(type, jsonData, block, resultArray, setLoading);
   }
   return resultArray.join('');
+};
+
+const handleBlock = (
+  type: string,
+  jsonData: string,
+  block: string,
+  resultArray: string[],
+  setLoading?: (isLoading: boolean) => void
+) => {
+  switch (type) {
+    case 'delta': {
+      console.log('delta:', jsonData);
+      setLoading?.(false);
+      const parsed = extractContent(jsonData, block);
+      try {
+        resultArray.push(parsed);
+      } catch (e) {
+        console.error(e);
+      }
+      break;
+    }
+    case 'created':
+    case 'in_progress': {
+      console.log('created/in_progress:', jsonData);
+      setLoading?.(true);
+      break;
+    }
+    case 'completed': {
+      console.log('completed:', jsonData);
+      setLoading?.(false);
+      break;
+    }
+  }
+};
+
+const extractContent = (jsonData: string, block: string): string => {
+  try {
+    const json = JSON.parse(jsonData);
+    if (json.role === 'assistant' && json.type === 'answer') {
+      return json.content || '';
+    }
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      console.warn('JSON 语法错误:', jsonData, 'in block:', block);
+    } else if (typeof error === 'string') {
+      console.warn('未知错误:', error, 'in block:', block);
+    }
+  }
+  return '';
 };
 
 export const useThrottle = (fn: Function, delay: number = 100) => {

@@ -47,6 +47,7 @@ export const MessageList = ({
       behavior: 'auto',
     });
   }, [autoScroll, isAutoScrollEnabled, messageList]);
+
   useEffect(() => {
     if (!isAutoScrollEnabled) return;
     const container = containerRef.current;
@@ -86,6 +87,7 @@ export const MessageList = ({
               renderBubble(message, index)
             ) : (
               <Bubble
+                loading={message.loading}
                 key={index}
                 content={message.content}
                 placement={message.role === 'user' ? 'end' : 'start'}

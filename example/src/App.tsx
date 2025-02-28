@@ -2,7 +2,6 @@ import './App.css';
 import React, { ChangeEvent } from 'react';
 import {
   createConversation,
-  createMessage,
   launchChat,
   viewMessageList,
 } from '../../src/api/index';
@@ -14,6 +13,7 @@ import { Conversation, Conversations } from './Conversations';
 export interface MessageInfo {
   role: string;
   content: string;
+  loading?: boolean;
 }
 function App() {
   const [isReplying, setIsReplying] = React.useState(false);
@@ -22,6 +22,7 @@ function App() {
 
   const [currentConversationId, setCurrentConversationId] =
     React.useState<string>('');
+
 
   const { startProcessing } = useStreamProcessor();
   const fetchData = async (content: string) => {
@@ -39,7 +40,6 @@ function App() {
         },
       ],
     });
-    console.log('response', response.data);
 
     startProcessing({
       data: response.data,
@@ -49,13 +49,17 @@ function App() {
           {
             role: 'assistant',
             content: '',
+            loading: true,
           },
         ]);
       },
-      onMessageUpdate: content => {
+      onMessageUpdate: (content, isLoading) => {
         setMessageList(prev => {
           const last = prev[prev.length - 1];
-          return [...prev.slice(0, -1), { ...last, content: content }];
+          return [
+            ...prev.slice(0, -1),
+            { ...last, content: content, loading: isLoading },
+          ];
         });
       },
       onCompleted: () => {
@@ -196,6 +200,7 @@ function App() {
                     </div>
                   )
                 }
+                loading={message.loading}
                 footer={message.role === 'user' ? null : '2021-08-24 15:00:00'}
                 content={message.content}
                 placement={message.role === 'user' ? 'end' : 'start'}

@@ -63,11 +63,7 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
   }
 
   let fullContent: React.ReactNode = (
-    <div
-      className="temp-bubble-content"
-    >
-      {contentNode}
-    </div>
+    <div className="bubble-content">{contentNode}</div>
   );
   if (header || footer) {
     fullContent = (
@@ -77,6 +73,7 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
           alignItems: 'flex-end',
         }}
       >
+        {header && <div>{header}</div>}
         {fullContent}
         {footer && <div>{footer}</div>}
       </div>
@@ -91,7 +88,7 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
     <div
       {...restProps}
       ref={ref}
-      className="temp-bubble-container"
+      className="bubble-container"
       style={{
         ...placementStyle,
         padding: '10px',
