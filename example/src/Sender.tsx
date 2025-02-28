@@ -37,6 +37,7 @@ export const Sender = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
       e.preventDefault();
+      if (!inputValue) return;
       onSubmit(inputValue);
     }
   };

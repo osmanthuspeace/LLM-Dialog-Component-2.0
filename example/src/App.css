@@ -9,7 +9,19 @@ body,
 p {
   margin: 0;
 }
-
+ul {
+  list-style: none;
+  padding: 0;
+}
+.conversation-item {
+  background-color: aliceblue;
+}
+.conversation-item:hover {
+  background-color: #d2d2d2;
+}
+.new-conversation-btn:hover {
+  background-color: #d2d2d2;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

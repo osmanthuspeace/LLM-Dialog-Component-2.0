@@ -1,87 +1,99 @@
-import { AxiosResponse } from 'axios';
-import { MessageInfo } from './App';
 import React from 'react';
 
-export const useStreamProcessor = async (
-  response: AxiosResponse<ReadableStream>,
-  setMessageList: React.Dispatch<React.SetStateAction<MessageInfo[]>>,
-  setIsReplying: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  if (!response.data) {
-    console.error('No body in response');
-    return;
-  }
-  setMessageList(prev => [
-    ...prev,
-    {
-      role: 'assistant',
-      content: '',
-    },
-  ]);
-  const reader = response.data.getReader();
-  const decoder = new TextDecoder();
-  let isDone = false;
-  let data = '';
-  while (!isDone) {
-    const { value, done } = await reader.read();
-    isDone = done;
-    if (isDone) {
-      const finalText = decoder.decode(undefined, { stream: false });
-      data += finalText;
-      setMessageList(prev => {
-        const last = prev[prev.length - 1];
-        return [...prev.slice(0, -1), { ...last, content: data }];
-      });
-      break;
-    } else if (value) {
-      const decodedValue = decoder.decode(value, { stream: true });
+interface StartProcessingOptions {
+  data: ReadableStream;
+  onMessageUpdate: (content: string) => void;
+  onStart: () => void;
+  onCompleted: () => void;
+  onError: (error: unknown) => void;
+  handleExtractContent?: (decodedValue: string) => string;
+}
 
-      // console.log('decodedValue', decodedValue);
+export const useStreamProcessor = () => {
+  const controller = new AbortController();
+  const startProcessing = async (options: StartProcessingOptions) => {
+    const {
+      data,
+      onStart,
+      onMessageUpdate,
+      onCompleted,
+      onError,
+      handleExtractContent = extractContent,
+    } = options;
 
-      const splitedValue = decodedValue.split('\n');
+    if (!data) {
+      onError(new Error('No body in response'));
+    }
+    const { signal } = controller;
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    let isDone = false;
+    let content = '';
 
-      const resultArray: string[] = [];
-      for (let i = 0; i < splitedValue.length; i++) {
-        const str = splitedValue[i];
-        if (str.trim().length === 0) continue;
-        if (str.startsWith('event:')) {
-          const type = str.split('.')[2];
-          if (type === 'delta') {
-            i++;
-            const substr = splitedValue[i];
-            if (substr.startsWith('data:')) {
-              const data = substr.substring('data:'.length);
-              try {
-                const json = JSON.parse(data);
-                // console.log('json', json);
+    try {
+      onStart();
+      while (!signal.aborted) {
+        const { value, done } = await reader.read();
+        isDone = done;
+        if (isDone) {
+          const finalText = decoder.decode(undefined, { stream: false });
+          content += finalText;
 
-                if (json.role === 'assistant' && json.type === 'answer') {
-                  resultArray.push(json.content);
-                }
-              } catch (error) {
-                if (error instanceof SyntaxError) {
-                  console.warn('JSON 语法错误:', str);
-                } else if (typeof error === 'string') {
-                  console.warn('未知错误:', error);
-                }
-                continue;
-              }
-            }
-          }
+          onMessageUpdate(content);
+          break;
+        } else if (value) {
+          const decodedValue = decoder.decode(value, { stream: true });
+
+          const result = handleExtractContent(decodedValue);
+
+          content += result;
+
+          onMessageUpdate(content);
         }
       }
-      if (resultArray.length > 0) {
-        data += resultArray.join('');
+      onCompleted();
+    } catch (error) {
+      onError(error);
+    }
+  };
+  return { startProcessing, abort: () => controller.abort() };
+};
 
-        setMessageList(prev => {
-          const last = prev[prev.length - 1];
-          return [...prev.slice(0, -1), { ...last, content: data }];
-        });
+//从raw的数据中提取出AI的回答内容
+const extractContent = (decodedValue: string): string => {
+  const BLOCK_SEPARATOR = '\n\n';
+  const DATA_PREFIX = 'data:';
+  const blocks = decodedValue.split(BLOCK_SEPARATOR);
+  const resultArray: string[] = [];
+
+  for (const block of blocks) {
+    const lines = block.split('\n');
+    const type = lines[0].split('.')[2];
+    let jsonData = '';
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) continue;
+      if (trimmedLine.startsWith(DATA_PREFIX)) {
+        jsonData += trimmedLine.slice(DATA_PREFIX.length).trim();
+      }
+    }
+    if (type === 'delta') {
+      try {
+        const json = JSON.parse(jsonData);
+        if (json.role === 'assistant' && json.type === 'answer') {
+          resultArray.push(json.content || '');
+        }
+      } catch (error) {
+        if (error instanceof SyntaxError) {
+          console.warn('JSON 语法错误:', jsonData, 'in block:', block);
+        } else if (typeof error === 'string') {
+          console.warn('未知错误:', error, 'in block:', block);
+        }
+        continue;
       }
     }
   }
-  console.log('Received data:', data);
-  setIsReplying(false);
+  return resultArray.join('');
 };
 
 export const useThrottle = (fn: Function, delay: number = 100) => {
