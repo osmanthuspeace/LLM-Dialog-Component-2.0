@@ -38,7 +38,7 @@ const Sender: React.FC<SenderProps> = props => {
       setValue(newValue);
     }
 
-    onChange?.(newValue, e);
+    onChange?.(e);
   };
 
   // 处理提交

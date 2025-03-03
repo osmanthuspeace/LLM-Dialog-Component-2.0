@@ -7,9 +7,9 @@ import {
 } from '../../src/api/index';
 import { useStreamProcessor } from './util';
 import { MessageList } from './MessageList';
-import { Sender } from './Sender';
 import Bubble from '../../src/components/bubble';
 import { Conversation, Conversations } from './Conversations';
+import Sender from '../../src/components/Sender/index';
 export interface MessageInfo {
   role: string;
   content: string;
@@ -100,14 +100,16 @@ function App() {
       })
       .catch(e => {
         console.log(e);
+      })
+      .finally(() => {
+        setMessageList([]);
       });
   };
+  React.useEffect(() => {
+    console.log('messageList', messageList);
+  }, [messageList]);
   const handleActiveChange = (key: string) => {
-    console.log('active change', key);
-
     viewMessageList(key).then(r => {
-      console.log('viewMessageList', r.data);
-
       const messages = r.data.data;
       setMessageList([]);
       messages.forEach(message => {
@@ -128,6 +130,7 @@ function App() {
         display: 'flex',
         flexDirection: 'row',
         height: '100%',
+        gap: '10px',
       }}
     >
       <div>
@@ -221,12 +224,13 @@ function App() {
             );
           }}
         />
-        <Sender
+        <Sender onSubmit={handleSubmit} onChange={handleChange}></Sender>
+        {/* <Sender
           inputValue={inputValue}
           isReplying={isReplying}
           onSubmit={handleSubmit}
           onChange={handleChange}
-        ></Sender>
+        ></Sender> */}
       </div>
     </div>
   );

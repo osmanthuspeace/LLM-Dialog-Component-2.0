@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Sender.css';
 
 export interface SenderProps {
@@ -46,6 +46,13 @@ export const Sender = ({
       target.style.height = `${target.scrollHeight}px`;
     }
   };
+  useEffect(() => {
+    const textarea = document.querySelector(
+      '.sender-textarea'
+    ) as HTMLTextAreaElement;
+    textarea.style.height = 'auto';
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }, [inputValue]);
 
   return (
     <>

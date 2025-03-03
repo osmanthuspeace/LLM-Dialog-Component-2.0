@@ -19,7 +19,7 @@ ul {
   background-color: aliceblue;
 }
 .conversation-item:hover {
-  background-color: #d2d2d2;
+  background-color: #f1f1f1;
 }
 .new-conversation-btn:hover {
   background-color: #d2d2d2;
@@ -80,6 +80,5 @@ ul {
   flex: 1;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  padding: 10px;
   position: relative;
 }
