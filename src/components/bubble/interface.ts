@@ -25,6 +25,7 @@ export interface BubbleProps<ContentType extends BubbleContentType = string>
   isStreaming?: boolean;
   messageRender?: (content: ContentType) => React.ReactNode;
   loadingRender?: () => React.ReactNode;
+  avatar?: React.ReactNode;
   header?: React.ReactNode;
   footer?: React.ReactNode;
 }

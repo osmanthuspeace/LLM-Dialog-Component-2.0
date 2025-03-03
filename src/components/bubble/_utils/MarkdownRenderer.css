@@ -1,26 +1,27 @@
-.code-block{
-    border: 1px solid #50505A;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #50505A;
+.code-block {
+  border: 1px solid #50505a;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #50505a;
+  max-width: 100%;
 }
 
-.code-header{
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 15px;
-    font-size: 12px;
+.code-header {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 15px;
+  font-size: 12px;
 }
 
-.copy-btn{
-    color: white;
-    background-color: #50505A;
-    border: none;
-    font-size: 12px;
+.copy-btn {
+  color: white;
+  background-color: #50505a;
+  border: none;
+  font-size: 12px;
 }
 
-pre.code-pre{
-    margin: 0;
+pre.code-pre {
+  margin: 0;
 }

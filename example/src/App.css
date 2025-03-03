@@ -5,7 +5,9 @@ body,
   height: 100%;
   margin: 0;
 }
-
+* {
+  box-sizing: border-box;
+}
 p {
   margin: 0;
 }
@@ -56,4 +58,28 @@ ul {
 
 .read-the-docs {
   color: #888;
+}
+.conversations-container {
+  width: 200px;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-top: 0;
+}
+
+.new-conversation-btn {
+  margin-bottom: 5px;
+}
+
+.message-list-container {
+  flex: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
 }

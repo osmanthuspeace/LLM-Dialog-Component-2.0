@@ -97,7 +97,7 @@ const handleBlock = (
 ) => {
   switch (type) {
     case 'delta': {
-      console.log('delta:', jsonData);
+      // console.log('delta:', jsonData);
       setLoading?.(false);
       const parsed = extractContent(jsonData, block);
       try {
@@ -109,12 +109,12 @@ const handleBlock = (
     }
     case 'created':
     case 'in_progress': {
-      console.log('created/in_progress:', jsonData);
+      // console.log('created/in_progress:', jsonData);
       setLoading?.(true);
       break;
     }
     case 'completed': {
-      console.log('completed:', jsonData);
+      // console.log('completed:', jsonData);
       setLoading?.(false);
       break;
     }

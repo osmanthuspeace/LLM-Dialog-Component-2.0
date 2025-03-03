@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Sender.css';
 
 export interface SenderProps {
   inputValue: string;
@@ -29,34 +30,26 @@ export const Sender = ({
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { target } = e;
     target.style.height = 'auto';
-    target.style.height = `${target.scrollHeight - 20}px`;
+    target.style.height = `${target.scrollHeight}px`;
 
     onChange(e);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
+      const target = e.target as HTMLTextAreaElement;
+
       e.preventDefault();
       if (!inputValue) return;
       onSubmit(inputValue);
+      target.style.height = 'auto';
+      target.style.height = `${target.scrollHeight}px`;
     }
   };
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          width: '400px',
-          position: 'absolute',
-          bottom: '10px',
-          margin: 'auto 0',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      <form onSubmit={handleSubmit} className="sender-form">
         <textarea
           placeholder="发送消息"
           value={inputValue}
@@ -65,31 +58,12 @@ export const Sender = ({
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
           rows={1}
-          style={{
-            flex: '1',
-            fontSize: '16px',
-            padding: '10px 50px 10px 10px',
-            outline: 'none',
-            border: '1px solid grey',
-            borderRadius: '20px',
-            resize: 'none',
-          }}
+          className="sender-textarea"
         ></textarea>
         <button
           type="submit"
           disabled={!inputValue}
-          style={{
-            ...cursorStyle,
-            position: 'absolute',
-            right: '20px',
-            outline: 'none',
-            border: 'none',
-            height: '24px',
-            width: '24px',
-            padding: '0',
-            backgroundColor: '#00B8DB',
-            borderRadius: 'calc(infinity * 1px)',
-          }}
+          className={`sender-submit-button ${inputValue === '' || isReplying ? 'cursor-not-allowed' : 'cursor-pointer'}`}
         >
           ⬆️
         </button>

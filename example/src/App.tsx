@@ -23,7 +23,6 @@ function App() {
   const [currentConversationId, setCurrentConversationId] =
     React.useState<string>('');
 
-
   const { startProcessing } = useStreamProcessor();
   const fetchData = async (content: string) => {
     setIsReplying(true);
@@ -129,7 +128,6 @@ function App() {
         display: 'flex',
         flexDirection: 'row',
         height: '100%',
-        padding: '10px',
       }}
     >
       <div>
@@ -156,15 +154,6 @@ function App() {
           className="conversations-container"
           defaultActiveKey="1"
           activeKey={currentConversationId}
-          style={{
-            width: '200px',
-            height: '100%',
-            overflow: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '5px',
-            padding: '10px',
-          }}
           conversations={conversations}
           onActiveChange={handleActiveChange}
         >
@@ -176,11 +165,7 @@ function App() {
           </button>
         </Conversations>
       </div>
-      <div
-        style={{
-          flex: '1',
-        }}
-      >
+      <div className="message-list-container">
         <MessageList
           messageList={messageList}
           renderBubble={(message: MessageInfo, index: number) => {
@@ -203,6 +188,29 @@ function App() {
                 loading={message.loading}
                 footer={message.role === 'user' ? null : '2021-08-24 15:00:00'}
                 content={message.content}
+                avatar={
+                  message.role === 'user' ? (
+                    <img
+                      src="https://img.icons8.com/user"
+                      alt="user"
+                      style={{
+                        width: '30px',
+                        height: '30px',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src="https://img.icons8.com/user"
+                      alt="user"
+                      style={{
+                        width: '30px',
+                        height: '30px',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  )
+                }
                 placement={message.role === 'user' ? 'end' : 'start'}
                 style={{
                   backgroundColor:
