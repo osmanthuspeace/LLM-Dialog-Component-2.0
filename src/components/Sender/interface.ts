@@ -40,12 +40,7 @@ export interface SenderProps
   /** 点击发送按钮的回调 */
   onSubmit?: (message: string) => void;
   /** 输入框值改变的回调 */
-  onChange?: (
-    value: string,
-    event?:
-      | React.FormEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   /** 点击取消按钮的回调 */
   onCancel?: () => void;
   /** 文件上传回调 */

@@ -17,6 +17,7 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
     isStreaming = false,
     messageRender = MarkdownRenderer,
     loadingRender,
+    avatar,
     header,
     footer,
     ...restProps
@@ -50,27 +51,36 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
     );
   } else {
     contentNode = (
-      <div
-        style={{
-          maxWidth: '100%',
-        }}
-      >
+      <>
         {mergedContent}
         {isTyping && customSuffix}
         {/* 如果正在打字，就显示自定义的光标 */}
-      </div>
+      </>
     );
   }
 
+  const avatarNode = React.isValidElement(avatar) ? (
+    avatar
+  ) : (
+    <div className="bubble-avatar" style={{ marginRight: '10px' }}>
+      {avatar}
+    </div>
+  );
+  const alignStyle: CSSProperties =
+    placement === 'end' ? { marginLeft: 'auto' } : {};
   let fullContent: React.ReactNode = (
-    <div className="bubble-content">{contentNode}</div>
+    <div className="bubble-content" style={{ ...alignStyle, maxWidth: '100%' }}>
+      {contentNode}
+    </div>
   );
   if (header || footer) {
     fullContent = (
       <div
         className={`${prefixCls}-content-wrapper`}
         style={{
-          alignItems: 'flex-end',
+          display: 'flex',
+          flexDirection: 'column',
+          maxWidth: '85%',
         }}
       >
         {header && <div>{header}</div>}
@@ -92,8 +102,10 @@ const Bubble: React.ForwardRefRenderFunction<any, BubbleProps> = (
       style={{
         ...placementStyle,
         padding: '10px',
+        gap: '12px',
       }}
     >
+      {avatar && <div>{avatarNode}</div>}
       {fullContent}
     </div>
   );

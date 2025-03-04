@@ -5,7 +5,6 @@ import 'highlight.js/styles/vs2015.css';
 import './MarkdownRenderer.css';
 
 const MarkdownRenderer = (mdContent: string) => {
-
   const md = useMemo(() => {
     const parser = new MarkdownIt({
       html: true,
@@ -17,6 +16,13 @@ const MarkdownRenderer = (mdContent: string) => {
 
   const html = useMemo(() => md.render(mdContent), [mdContent]);
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div
+      dangerouslySetInnerHTML={{ __html: html }}
+      style={{
+        maxWidth: '100%',
+      }}
+    />
+  );
 };
 export default MarkdownRenderer;

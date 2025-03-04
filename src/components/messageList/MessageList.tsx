@@ -5,9 +5,9 @@ import {
   useRef,
   useState,
 } from 'react';
-import Bubble from '../../src/components/bubble';
-import { MessageInfo } from './App';
-import { useThrottle } from './util';
+import Bubble from '../bubble';
+import { MessageInfo } from '../../../example/src/App';
+import { useThrottle } from './_util/util';
 
 export interface MessageListProps extends HTMLAttributes<HTMLDivElement> {
   messageList: MessageInfo[];
@@ -39,9 +39,8 @@ export const MessageList = ({
   });
 
   useLayoutEffect(() => {
-    if (!containerRef.current || !isAutoScrollEnabled) return;
+    if (!containerRef || !containerRef.current || !isAutoScrollEnabled) return;
 
-    if (!containerRef || !containerRef.current) return;
     containerRef.current.scrollTo({
       top: containerRef.current.scrollHeight,
       behavior: 'auto',
@@ -63,11 +62,9 @@ export const MessageList = ({
       <div
         className="message-container"
         style={{
-          height: '80%',
+          height: '95%',
           overflow: 'auto',
-          border: '1px solid black',
-          borderRadius: '10px',
-          padding: '0 50px',
+          padding: '0 10px',
           position: 'relative',
         }}
         {...rest}
@@ -91,6 +88,11 @@ export const MessageList = ({
                 key={index}
                 content={message.content}
                 placement={message.role === 'user' ? 'end' : 'start'}
+                style={
+                  message.role === 'user'
+                    ? { justifyContent: 'flex-end' }
+                    : { justifyContent: 'flex-start' }
+                }
               />
             );
           })}

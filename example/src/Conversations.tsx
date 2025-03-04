@@ -79,7 +79,7 @@ const ConversationItem = (props: ConversationsItemProps) => {
         flexDirection: 'row',
         padding: '10px',
         cursor: 'pointer',
-        backgroundColor: active ? 'lightblue' : '',
+        backgroundColor: active ? 'oklch(0.87 0 0)' : 'oklch(0.97 0 0)',
         borderRadius: '10px',
       }}
       className="conversation-item"
