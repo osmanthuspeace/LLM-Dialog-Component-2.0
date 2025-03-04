@@ -137,6 +137,7 @@ const extractContent = (jsonData: string, block: string): string => {
   return '';
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const useThrottle = (fn: Function, delay: number = 100) => {
   const last = React.useRef(0);
   return React.useCallback(

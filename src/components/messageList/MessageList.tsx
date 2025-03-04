@@ -5,9 +5,9 @@ import {
   useRef,
   useState,
 } from 'react';
-import Bubble from '../../src/components/bubble';
-import { MessageInfo } from './App';
-import { useThrottle } from './util';
+import Bubble from '../bubble';
+import { MessageInfo } from '../../../example/src/App';
+import { useThrottle } from './_util/util';
 
 export interface MessageListProps extends HTMLAttributes<HTMLDivElement> {
   messageList: MessageInfo[];

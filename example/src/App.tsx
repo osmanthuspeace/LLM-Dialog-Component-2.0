@@ -5,8 +5,8 @@ import {
   launchChat,
   viewMessageList,
 } from '../../src/api/index';
-import { useStreamProcessor } from './util';
-import { MessageList } from './MessageList';
+import { useStreamProcessor } from '../../src/components/messageList/_util/util';
+import { MessageList } from '../../src/components/messageList/MessageList';
 import Bubble from '../../src/components/bubble';
 import { Conversation, Conversations } from './Conversations';
 import Sender from '../../src/components/Sender/index';
