@@ -139,7 +139,7 @@
 }
 
 /* 暗色主题 */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .sender-container {
     background-color: #1f1f1f;
     border-color: #333;
@@ -169,4 +169,4 @@
     background-color: #333;
     color: #aaa;
   }
-}
+} */

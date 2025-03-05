@@ -81,6 +81,8 @@ const ConversationItem = (props: ConversationsItemProps) => {
         cursor: 'pointer',
         backgroundColor: active ? 'oklch(0.87 0 0)' : 'oklch(0.97 0 0)',
         borderRadius: '10px',
+        justifyContent:"center",
+        fontSize: '15px',
       }}
       className="conversation-item"
       onClick={handleClick}
